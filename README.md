@@ -4,3 +4,10 @@ The following steps were involved in the project;
 Data collection and storage, this step entailed collecting data from open portal from Vancouver city and storing the data in AWS S3 bucket and cleaning it
 Data ingestion, this entailed uploading data for 2023 and 2024 using AWS glue databrew
 Data cleaning and structuring, this step enated cleaning data, for example filling missing value, converting data formats, data correction, and renaming collumns
+![image](https://github.com/user-attachments/assets/3c92f29b-a25f-4f1e-bb21-cbfeb18da4d5)
+Data pipeline design, extract, transform, and load (ETL)pipeline was used to merge data from both years and group the licenses. This also helps to filter unnecessary data
+Data Analysis, this was the fifth step in the project and because Athena had issues, analysis was done through excel. The CSV files were downloaded for analysis and trends were shown through graphs
+Insert graph
+Data publishing , this was the final step in this project which entailed hosting the dataon AWS EC2 to display the analysis output. 
+Tools used; ASW S3 was used to retrieve and store data, AWS Glue Databrew was used to prepare and clean data, Excel was used to generate graphs and data visualization, AWS EC2 was used for web server setup to help in the publication of the project, and Python/SQL was used for scripting and processing data where applicable
+Results; there was significant changes in how licenses were distributed in the streamlined license category which can help with providing insights for future mitigations for licensing that would improve animal services

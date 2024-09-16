@@ -27,6 +27,8 @@
    
 ![image](https://github.com/user-attachments/assets/ab44f174-8a60-4257-9627-4e70c9670b95)
 
+![image](https://github.com/user-attachments/assets/2cb6785e-aed3-473e-891b-27c1760f29e5)
+
  **Data publishing**:this was the final step in this project which entailed hosting the dataon AWS EC2 to display the analysis output. 
  **Tools used**; ASW S3 was used to retrieve and store data, AWS Glue Databrew was used to prepare and clean data, Excel was used to generate graphs and data visualization, AWS EC2 was used for web server setup to help in the publication of the project, and Python/SQL was used for scripting and processing data where applicable
    

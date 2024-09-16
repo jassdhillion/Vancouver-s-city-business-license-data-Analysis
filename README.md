@@ -1,2 +1,6 @@
 # Vancouver's City License issuing services Data Analysis; The project is composed of an analyses concerning business license issued to business owners in the Vancouver's License office. The aim of the project was to improve animal services and its composed of two key dataset; a. from 2023( before new categories were introduced) and b. from 2024( after introduction of the streamlining category). The goal of the project was to discover how the new categories impacted licnese distribution in Vancouver and to also offer new insights to the stakeholders.
-Objectives; to examine the transition of license category from old to the new version, to analyze the distribution of licenses in the new category, and to provide insights on how businesses adopted to the new category of business licensing
+Objectives; to examine the transition of license category from old to the new version, to analyze the distribution of licenses in the new category, and to provide insights on how businesses adopted to the new category of business licensing.
+The following steps were involved in the project;
+Data collection and storage, this step entailed collecting data from open portal from Vancouver city and storing the data in AWS S3 bucket and cleaning it
+Data ingestion, this entailed uploading data for 2023 and 2024 using AWS glue databrew
+Data cleaning and structuring, this step enated cleaning data, for example filling missing value, converting data formats, data correction, and renaming collumns

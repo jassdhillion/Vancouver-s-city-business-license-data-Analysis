@@ -32,7 +32,7 @@
  **Data publishing**:this was the final step in this project which entailed hosting the dataon AWS EC2 to display the analysis output. 
  **Tools used**; ASW S3 was used to retrieve and store data, AWS Glue Databrew was used to prepare and clean data, Excel was used to generate graphs and data visualization, AWS EC2 was used for web server setup to help in the publication of the project, and Python/SQL was used for scripting and processing data where applicable
 
-   ![image]()
+   ![image](https://github.com/jassdhillion/Vancouver-s-city-business-license-data-Analysis/blob/main/Screenshot%202024-08-24%20204933.png)
 ![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
 
  **Results**; there was significant changes in how licenses were distributed in the streamlined license category which can help with providing insights for future mitigations for licensing that would improve animal services

@@ -35,4 +35,64 @@
    ![image](https://github.com/jassdhillion/Vancouver-s-city-business-license-data-Analysis/blob/main/Screenshot%202024-08-24%20204933.png)
 ![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
 
- **Results**; there was significant changes in how licenses were distributed in the streamlined license category which can help with providing insights for future mitigations for licensing that would improve animal services
+**Data Protection** 
+Ensuring the security of the business license dataset is crucial, given the sensitive nature of the information, such as business addresses and license numbers. The following key components were implemented to guarantee data confidentiality, integrity, and availability:
+1.	Data Confidentiality and Integrity
+To protect sensitive business information, all data is encrypted in transit and at rest using AWS Key Management Service (KMS). The encryption of data stored in S3 buckets ensures that unauthorized access is prevented, including from the cloud service provider’s personnel.
+•	Symmetric Encryption: Symmetric encryption has been selected to streamline the process for authorized users. This eliminates the need for separate private key management while ensuring secure data access for City of Vancouver employees.  the default encryption enabled for the dataset stored in the S3 bucket, which is used to store business license records.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+•	Custom Encryption Key: A custom encryption key was created to protect the dataset instead of using AWS’s default encryption. This key is restricted to authorized DAP users (City employees managing the dataset) and cannot be accessed by unauthorized individuals. This is critical for ensuring that only the City of Vancouver employees responsible for data management have control over encryption processes, further reducing the risk of data breaches. the custom encryption key used for the dataset.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+2.	Data Availability
+To ensure data availability in case of accidental deletion, unauthorized modification, or data corruption, the following strategies were implemented:
+•	Data Replication and Versioning: The business license data is automatically replicated into a separate backup S3 bucket. Versioning is enabled to store multiple versions of each data object, meaning that each time a data object is updated, a new version is created and stored. This ensures that previous versions of the dataset can be retrieved if needed. Figure 3 shows the replication rules applied to the main S3 bucket, ensuring that all data changes are backed up automatically.
+•	Backup Encryption: To ensure that the replicated backup data is secure, the backup S3 bucket is also encrypted using the same encryption key as the primary data bucket. This measure ensures that backup data is protected from unauthorized access in the same way as the primary data.  the encryption settings for the backup bucket, demonstrating that the backup is equally secure.
+By implementing encryption, replication, and versioning, the business license data is fully protected from both internal and external threats. This ensures that the dataset remains secure, accessible, and reliable always.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+**Data Governance**  
+Data governance is essential for ensuring the privacy, quality, and regulatory compliance of the business license data, particularly after the City of Vancouver’s May 6, 2024, update, which streamlined business license categories into fewer than 100. The following processes were implemented to maintain the integrity and usability of the dataset:
+1.	Privacy Management
+Given the inclusion of sensitive data (e.g., business addresses for home-based businesses), it is crucial to ensure that private information is protected:
+•	Data Anonymization: The ETL pipeline built with AWS Glue automatically scans the dataset for sensitive data, such as personal business addresses, which are excluded from public view to comply with privacy regulations. The ETL process replaces sensitive values with anonymized data (e.g., "***" in place of private addresses). This ensures that the data remains compliant with data privacy laws, such as Canada’s Personal Information Protection and Electronic Documents Act (PIPEDA).
+•	Regular Privacy Audits: The ETL job is scheduled to run weekly and scan the data for sensitive information to ensure that any new entries meet privacy criteria.
+the ETL pipeline configured to perform data anonymization tasks, ensuring that sensitive business information is protected.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+
+3.	Data Quality Management
+Maintaining high-quality data is essential for ensuring accurate reporting and decision-making by City officials. The following quality checks are automated through the ETL pipeline:
+•	Completeness: The ETL pipeline ensures that critical fields, such as Business Type, License Number, and Issue Date, are populated. A completeness rule checks that no more than 5% of these fields contain null values. Data records that do not meet this threshold are flagged for review or excluded from further processing.
+•	Freshness: Business licenses should be relevant and up to date. The ETL job checks the freshness of records by verifying that license data from 2024 is no older than 365 days up to 720 days. Records outside this range are flagged for further inspection, ensuring that only current business licenses are used in decision-making processes.
+•	Validity: Fields like Business Type are validated to ensure they correspond to the new streamlined categories introduced post-May 6, 2024. This ensures that all business licenses are classified correctly under the new system, preventing errors in the dataset.
+•	Uniqueness: License numbers should be unique. The ETL checks for any duplicate license numbers to avoid duplication and confusion in the dataset. Any identified duplicates are reported for manual investigation.
+the data quality rules applied to the 2023 and 2024 datasets, respectively. Data that passes these quality checks is stored in the trusted zone, while any data that fails is excluded from further analysis.
+•	Automated Governance: To ensure that privacy and quality checks are consistently applied, these ETL jobs are automatically executed every Monday at 23:59.
+ the workflow schedule for these ETL jobs, ensuring the city has high-quality, anonymized data available always.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+**Data Monitoring**
+Effective data monitoring ensures that the DAP is running smoothly, costs are controlled, and any issues with usage or user activity are detected promptly. Monitoring is divided into three key aspects:
+1.	Usage and Cost Monitoring
+AWS CloudWatch is used to monitor the platform’s resource usage and associated costs. A custom CloudWatch dashboard tracks the following:
+•	S3 and Glue Costs: The dashboard provides a breakdown of costs associated with data storage in S3 and data processing via AWS Glue. This allows the City to track monthly spending trends and optimize resource allocation as needed.
+ the CloudWatch dashboard monitoring costs.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+
+•	Data Storage Usage: The dashboard also tracks the size of the S3 buckets, providing insight into how much data is being stored and the rate at which the dataset is growing. This helps the City manage its storage resources efficiently.
+•	Alarms for Cost Control: An alarm is set to trigger an SNS notification when the DAP’s monthly costs exceed $35. This alarm sends an email to the City’s data manager, enabling prompt action if spending increases unexpectedly. 
+the configuration of the SNS alarm.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+2.	User Activity Monitoring
+AWS CloudTrail is configured to log user activity across the DAP, ensuring that all actions—such as data uploads, license updates, and configuration changes—are tracked. The following activities are monitored:
+•	Read and Write Operations: CloudTrail logs any read or write operations performed on the business license dataset, ensuring that all data access is recorded for audit purposes.
+•	Management Events: CloudTrail also logs all management events, such as creating or deleting resources, to ensure full visibility into the platform’s operations.
+the CloudTrail configuration.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+•	Log Storage and Encryption: CloudTrail logs are stored in a dedicated, encrypted S3 bucket. The logs are critical for tracking user behavior and ensuring compliance with regulatory requirements. 
+the S3 bucket where these logs are securely stored.
+![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+

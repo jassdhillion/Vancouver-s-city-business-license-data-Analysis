@@ -40,7 +40,7 @@ Ensuring the security of the business license dataset is crucial, given the sens
 1.	Data Confidentiality and Integrity
 To protect sensitive business information, all data is encrypted in transit and at rest using AWS Key Management Service (KMS). The encryption of data stored in S3 buckets ensures that unauthorized access is prevented, including from the cloud service provider’s personnel.
 •	Symmetric Encryption: Symmetric encryption has been selected to streamline the process for authorized users. This eliminates the need for separate private key management while ensuring secure data access for City of Vancouver employees.  the default encryption enabled for the dataset stored in the S3 bucket, which is used to store business license records.
-![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
+![image](https://github.com/jassdhillion/Vancouver-s-city-business-license-data-Analysis/blob/main/Screenshot%202024-09-14%20135649.png)
 •	Custom Encryption Key: A custom encryption key was created to protect the dataset instead of using AWS’s default encryption. This key is restricted to authorized DAP users (City employees managing the dataset) and cannot be accessed by unauthorized individuals. This is critical for ensuring that only the City of Vancouver employees responsible for data management have control over encryption processes, further reducing the risk of data breaches. the custom encryption key used for the dataset.
 ![image](https://github.com/user-attachments/assets/08647563-e3d3-4b20-88ae-1d87db9f1531)
 2.	Data Availability
